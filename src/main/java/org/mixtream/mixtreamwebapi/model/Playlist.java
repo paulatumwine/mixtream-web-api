@@ -12,7 +12,7 @@ import java.util.List;
 @Document
 public class Playlist {
     @Id
-    Integer id;
+    String id;
     String title;
     String description;
     List<Track> trackList;

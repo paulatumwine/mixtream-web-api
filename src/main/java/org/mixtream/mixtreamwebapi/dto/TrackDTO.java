@@ -6,6 +6,7 @@ import org.mixtream.mixtreamwebapi.model.Artist;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -13,10 +14,10 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TrackDTO {
     Integer id;
-    @NotEmpty
+    @NotBlank
     String title;
     String description;
-    @NotEmpty
+    @NotBlank
     String path;
     @NotNull
     Artist artist;
