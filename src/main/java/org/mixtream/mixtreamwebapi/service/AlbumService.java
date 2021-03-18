@@ -17,13 +17,13 @@ public class AlbumService {
     AlbumRepository repository;
 
     public List<AlbumDTO> findAll() {
-        List<Album> albumList = repository.findAll();
-        return albumList.stream().map(AlbumAdapter::getAlbumDTO).collect(Collectors.toList());
+        List<Album> list = repository.findAll();
+        return list.stream().map(AlbumAdapter::getAlbumDTO).collect(Collectors.toList());
     }
 
     public AlbumDTO findById(String id) {
-        Album album = repository.findById(id).orElse(null);
-        return AlbumAdapter.getAlbumDTO(album);
+        Album obj = repository.findById(id).orElse(null);
+        return AlbumAdapter.getAlbumDTO(obj);
     }
 
     public AlbumDTO save(AlbumDTO request) {
