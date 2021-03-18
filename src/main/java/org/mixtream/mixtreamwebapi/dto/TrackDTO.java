@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @Data
 public class TrackDTO {
-    Integer id;
+    String id;
     @NotBlank
     String title;
     String description;

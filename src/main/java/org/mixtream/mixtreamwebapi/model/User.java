@@ -12,7 +12,7 @@ import java.util.List;
 @Document
 public class User {
     @Id
-    Integer id;
+    String id;
     String email;
     String password;
     String avatar;

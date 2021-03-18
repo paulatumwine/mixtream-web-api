@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @Data
 public class UserDTO {
-    Integer id;
+    String id;
     @NotBlank
     String email;
     String password;

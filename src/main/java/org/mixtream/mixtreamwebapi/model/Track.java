@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Track {
     @Id
-    Integer id;
+    String id;
     String title;
     String description;
     String path;
