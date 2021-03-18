@@ -21,7 +21,7 @@ public class AlbumService {
         return albumList.stream().map(AlbumAdapter::getAlbumDTO).collect(Collectors.toList());
     }
 
-    public AlbumDTO findById(Integer id) {
+    public AlbumDTO findById(String id) {
         Album album = repository.findById(id).orElse(null);
         return AlbumAdapter.getAlbumDTO(album);
     }
@@ -36,7 +36,7 @@ public class AlbumService {
         return AlbumAdapter.getAlbumDTO(response);
     }
 
-    public void delete(Integer id) {
+    public void delete(String id) {
         repository.deleteById(id);
     }
 

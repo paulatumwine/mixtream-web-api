@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @Data
 public class AlbumDTO {
-    Integer id;
+    String id;
     @NotBlank
     String title;
     String description;

@@ -12,7 +12,7 @@ import java.util.List;
 @Document
 public class Album {
     @Id
-    Integer id;
+    String id;
     String title;
     String description;
     List<Track> trackList;

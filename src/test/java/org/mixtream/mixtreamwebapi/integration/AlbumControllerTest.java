@@ -6,6 +6,8 @@ import org.mixtream.mixtreamwebapi.dto.AlbumDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.testng.annotations.Test;
@@ -18,12 +20,12 @@ import static org.testng.Assert.*;
 @Slf4j
 @AutoConfigureWebTestClient(timeout = "60000")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AlbumControllerTest {
+public class AlbumControllerTest extends AbstractTestNGSpringContextTests {
 
     private static String BASE_URI = "/album";
 
     AlbumDTO request;
-    Integer id;
+    String id;
 
     @Autowired
     WebTestClient client;
@@ -36,16 +38,14 @@ public class AlbumControllerTest {
                 .expectStatus()
                 .is2xxSuccessful()
                 .expectBodyList(AlbumDTO.class)
-                .hasSize(1)
                 .returnResult();
         assertNotNull(result.getResponseBody());
     }
 
     @Test(dependsOnMethods={"testCreate"})
     public void testFindByIdNotNull() {
-        EntityExchangeResult<AlbumDTO> result = client.put()
-                .uri(String.format("%s/%d", BASE_URI, id))
-                .bodyValue(request)
+        EntityExchangeResult<AlbumDTO> result = client.get()
+                .uri(String.format("%s/%s", BASE_URI, id))
                 .exchange()
                 .expectStatus()
                 .is2xxSuccessful()
@@ -57,12 +57,13 @@ public class AlbumControllerTest {
     @Test
     public void testCreate() {
         log.info("creating test data");
-        request = AlbumDTO.builder()
+        this.request = AlbumDTO.builder()
                 .title("Default Album")
                 .description("Default Description")
                 .trackList(new ArrayList<>())
                 .build();
         EntityExchangeResult<AlbumDTO> result = client.post().uri(BASE_URI)
+                .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(request)
                 .exchange()
                 .expectStatus()
@@ -83,7 +84,7 @@ public class AlbumControllerTest {
                 .trackList(new ArrayList<>())
                 .build();
         EntityExchangeResult<AlbumDTO> result = client.put()
-                .uri(String.format("%s/%d", BASE_URI, id))
+                .uri(String.format("%s/%s", BASE_URI, id))
                 .bodyValue(request)
                 .exchange()
                 .expectStatus()
@@ -97,7 +98,7 @@ public class AlbumControllerTest {
     @Test(dependsOnMethods={"testUpdate"})
     public void testDelete() {
         client.delete()
-                .uri(String.format("%s/%d", BASE_URI, id))
+                .uri(String.format("%s/%s", BASE_URI, id))
                 .exchange()
                 .expectStatus()
                 .is2xxSuccessful();
@@ -105,9 +106,8 @@ public class AlbumControllerTest {
 
     @Test(dependsOnMethods={"testDelete"})
     public void testFindByIdNull() {
-        EntityExchangeResult<AlbumDTO> result = client.put()
-                .uri(String.format("%s/%d", BASE_URI, id))
-                .bodyValue(request)
+        EntityExchangeResult<AlbumDTO> result = client.get()
+                .uri(String.format("%s/%s", BASE_URI, id))
                 .exchange()
                 .expectStatus()
                 .is2xxSuccessful()

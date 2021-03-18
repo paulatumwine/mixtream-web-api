@@ -28,20 +28,20 @@ public class AlbumController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlbumDTO> findById(@NotNull @PathVariable Integer id) {
+    public ResponseEntity<AlbumDTO> findById(@NotNull @PathVariable String id) {
         log.info("find by id: {}", id);
         AlbumDTO obj = service.findById(id);
         return Objects.isNull(obj.getId()) ? ResponseEntity.noContent().build() : ResponseEntity.ok(obj);
     }
 
     @PostMapping("")
-    public ResponseEntity<AlbumDTO> create(@Valid AlbumDTO obj) {
+    public ResponseEntity<AlbumDTO> create(@Valid @RequestBody AlbumDTO obj) {
         log.info("create: {}", obj);
         return ResponseEntity.accepted().body(service.save(obj));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlbumDTO> update(@NotNull @PathVariable Integer id, @Valid @RequestBody AlbumDTO requestBody) {
+    public ResponseEntity<AlbumDTO> update(@NotNull @PathVariable String id, @Valid @RequestBody AlbumDTO requestBody) {
         log.info("update: {}", requestBody);
         if (Objects.isNull(requestBody.getId())) {
             log.info("id missing, setting to: {}", id);
@@ -54,7 +54,7 @@ public class AlbumController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@NotNull @PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@NotNull @PathVariable String id) {
         log.info("delete by id: {}", id);
         service.delete(id);
         return ResponseEntity.ok().build();
