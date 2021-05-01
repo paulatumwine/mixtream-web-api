@@ -13,7 +13,6 @@ import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.*;
@@ -21,7 +20,7 @@ import static org.testng.Assert.*;
 @Slf4j
 @AutoConfigureWebTestClient(timeout = "60000")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TrackControllerTest extends AbstractTestNGSpringContextTests {
+public class TrackControllerTest extends AbstractTestNGSpringContextTests implements BaseContainer {
 
     private static String BASE_URI = "/track";
 
