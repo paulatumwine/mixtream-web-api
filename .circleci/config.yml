@@ -3,9 +3,24 @@ version: 2.1
 machine: true
 
 orbs:
-  maven: circleci/maven@1.1
+  maven: circleci/maven@1.0.1
+
+executors:
+  docker-mongo:
+    docker:
+      - image: circleci/openjdk:11-jdk-buster
+      - image: circleci/mongo:latest
+
+jobs:
+  build:
+    executor: docker-mongo
+    steps:
+      - checkout
+      - maven/with_cache:
+          steps:
+            - run: mvn -q test
 
 workflows:
-  maven_test:
+  build:
     jobs:
-      - maven/test
+      - build
