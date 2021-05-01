@@ -1,3 +1,5 @@
+[![Build Status](https://circleci.com/gh/paulatumwine/mixtream-web-api.svg?style=shield)](https://app.circleci.com/pipelines/github/paulatumwine/mixtream-web-api)
+
 # mixtream-web-api
 
 Backend API service for mixtream front end.
