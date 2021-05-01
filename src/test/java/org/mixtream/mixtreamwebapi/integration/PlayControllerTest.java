@@ -22,7 +22,7 @@ import static org.testng.Assert.*;
 @Slf4j
 @AutoConfigureWebTestClient(timeout = "60000")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PlayControllerTest extends AbstractTestNGSpringContextTests implements BaseContainer {
+public class PlayControllerTest extends AbstractTestNGSpringContextTests {
 
     private static String BASE_URI = "/play";
 
